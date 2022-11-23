@@ -3,3 +3,20 @@
     <button data-action="click->greeter#greet">Greet me!</button>
     <div data-greeter-target="output"></div>
 </div>
+
+<div data-controller="toggle">
+    <p data-toggle-target="element">Now you see me...</p>
+    <button data-action="click->toggle#toggle">Toggle visibility</button>
+</div>
+
+<div data-controller="toggle">
+    <button data-action="click->toggle#dualToggle" data-toggle-target="element">Now you see me</button>
+    <button data-action="click->toggle#dualToggle" data-toggle-target="elementTwo" style="visibility: hidden">Now you don't!</button>
+</div>
+
+<div data-controller="toggle">
+    <div data-toggle-target="element">
+        Toggle me, I dare you
+        <input type="checkbox" name="" id="" data-action="click->toggle#outline">
+    </div>
+</div>
