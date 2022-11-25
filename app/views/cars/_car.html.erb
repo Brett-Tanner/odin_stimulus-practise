@@ -1,0 +1,17 @@
+<div class="car">
+    <h2><%= link_to "#{car.brand} #{car.model}", car_path(car) %></h2>
+
+    <% if !car.variants.empty? %>
+        <h3>Variants</h3>
+        <% car.variants.each do |variant| %>
+            <h4><%= variant.variation %></h4>
+            <ul>
+                <li><%= "#{variant.top_speed}km/h" %></li>
+                <li><%= "$#{variant.price}" %></li>
+            </ul>
+        <% end %>
+    <% end %>
+
+    <%= link_to "Edit Car", edit_car_path(car) %>
+    <%= link_to "Crash Car", car_path(car), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+</div>

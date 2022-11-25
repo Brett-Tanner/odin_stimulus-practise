@@ -1,0 +1,30 @@
+<%= form_with model: @car do |form| %>
+    <div class="car_field">
+        <%= form.label :brand, "Brand:" %>
+        <%= form.text_field :brand %>
+    </div>
+
+    <div class="car_field">
+        <%= form.label :model, "Model:" %>
+        <%= form.text_field :model %>
+    </div>
+
+    <%= form.fields_for :variants do |variants_form| %>
+        <div class="variants_field">
+            <%= variants_form.label :variation, "Variation:" %>
+            <%= variants_form.text_field :variation %>
+        </div>
+
+        <div class="variants_field">
+            <%= variants_form.label :top_speed, "Top Speed:" %>
+            <%= variants_form.text_field :top_speed %>
+        </div>
+
+        <div class="variants_field">
+            <%= variants_form.label :price, "Price ($):" %>
+            <%= variants_form.text_field :price %>
+        </div>
+    <% end %>
+
+    <%= form.submit %>
+<% end %>
