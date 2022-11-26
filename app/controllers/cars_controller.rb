@@ -35,7 +35,7 @@ class CarsController < ApplicationController
       redirect_to car_path(@car)
     else
       flash.now[:alert] = "Unable to update car"
-      render :new, status: :unprocessable_entity
+      render :edit
     end
   end
 
@@ -53,6 +53,6 @@ class CarsController < ApplicationController
   private
 
   def car_params
-    params.require(:car).permit(:brand, :model, variants_attributes: [:variation, :top_speed, :price])
+    params.require(:car).permit(:brand, :model, variants_attributes: [:variation, :top_speed, :price, :_destroy, :id])
   end
 end

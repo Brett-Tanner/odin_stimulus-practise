@@ -1,4 +1,4 @@
-<%= form_with model: @car do |form| %>
+<%= form_with model: @car, data: {controller: :fields, nested_form_wrapper_selector_value: '.nested-form-wrapper'} do |form| %>
     <div class="car_field">
         <%= form.label :brand, "Brand:" %>
         <%= form.text_field :brand %>
@@ -9,22 +9,19 @@
         <%= form.text_field :model %>
     </div>
 
-    <%= form.fields_for :variants do |variants_form| %>
-        <div class="variants_field">
-            <%= variants_form.label :variation, "Variation:" %>
-            <%= variants_form.text_field :variation %>
-        </div>
+    <template data-fields-target="template">
+        <%= form.fields_for :variants, Variant.new, child_index: 'VARIANT' do |variants_fields| %>
+            <%= render "variant_fields", f: variants_fields %>
+        <% end %>
+    </template>
 
-        <div class="variants_field">
-            <%= variants_form.label :top_speed, "Top Speed:" %>
-            <%= variants_form.text_field :top_speed %>
-        </div>
-
-        <div class="variants_field">
-            <%= variants_form.label :price, "Price ($):" %>
-            <%= variants_form.text_field :price %>
-        </div>
+    <%= form.fields_for :variants do |variants_fields| %>
+        <%= render "variant_fields", f: variants_fields %>
     <% end %>
+
+    <div data-fields-target="target"></div>
+
+    <%= button_tag "Add Variant", data: {action: "fields#add"} %>
 
     <%= form.submit %>
 <% end %>
